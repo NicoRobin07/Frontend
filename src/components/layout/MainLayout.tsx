@@ -58,6 +58,11 @@ export function MainLayout({ children, title, subtitle, action, showBackButton =
               <p className="mt-1 text-muted-foreground">{subtitle}</p>
             )}
           </div>
+          
+          <div className="mb-6 p-4 bg-red-600 text-white rounded">
+          <h2>MainLayout is rendering children</h2>
+          </div>
+
 
           {children}
         </main>
