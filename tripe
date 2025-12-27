@@ -1,0 +1,5 @@
+[35msrc/components/integrations/ConfigureIntegrationModal.tsx[m[36m:[m    apiKey: '[1;31msk_[mlive_abc123def456ghi789jkl012mno345pqr',
+[35msrc/pages/ApiKeysManagement.tsx[m[36m:[m    key: '[1;31msk_[mlive_abc123def456ghi789jkl012mno345', 
+[35msrc/pages/ApiKeysManagement.tsx[m[36m:[m    const newKeyValue = '[1;31msk_[mnew_' + Math.random().toString(36).substring(2, 30);
+[35msrc/pages/Settings.tsx[m[36m:[m              <div className="p-2 bg-muted/50 rounded-lg"><p className="text-xs font-medium text-foreground">Production Key</p><p className="text-[10px] text-muted-foreground font-mono mt-0.5">[1;31msk_[mlive_••••••••4x2k</p></div>
+[35msrc/pages/Settings.tsx[m[36m:[m              <div className="p-2 bg-muted/50 rounded-lg"><p className="text-xs font-medium text-foreground">Test Key</p><p className="text-[10px] text-muted-foreground font-mono mt-0.5">[1;31msk_[mtest_••••••••8y3m</p></div>

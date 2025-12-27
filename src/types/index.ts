@@ -1,0 +1,128 @@
+export type VisaStatus = 'H1B' | 'OPT' | 'CPT' | 'GC' | 'USC' | 'L1' | 'L2' | 'H4 EAD' | 'TN';
+
+export type ConsultantStatus = 'bench' | 'available' | 'marketing' | 'placed' | 'interview';
+
+export interface Consultant {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  visaStatus: VisaStatus;
+  skills: string[];
+  rate: number;
+  resumeUrl?: string;
+  aiSummary?: string;
+  status: ConsultantStatus;
+  location: string;
+  experience: number;
+  lastUpdated: string;
+  matchScore?: number;
+}
+
+export type SubmissionStatus = 'applied' | 'submission' | 'interview_scheduled' | 'client_interview' | 'offer_letter' | 'placed' | 'rejected';
+
+export interface StatusHistoryEntry {
+  id: string;
+  fromStatus: SubmissionStatus | null;
+  toStatus: SubmissionStatus;
+  changedBy: string;
+  changedDate: string;
+  notes?: string;
+}
+
+export interface RateHistoryEntry {
+  id: string;
+  oldRate: number | null;
+  newRate: number;
+  changedBy: string;
+  changedDate: string;
+  reason?: string;
+  type: 'applied' | 'negotiated';
+}
+
+export interface Submission {
+  id: string;
+  consultantId: string;
+  consultantName: string;
+  vendorId: string;
+  vendorName: string;
+  vendorContact?: string;
+  jobId: string;
+  jobTitle: string;
+  client: string;
+  submissionDate: string;
+  status: SubmissionStatus;
+  appliedRate: number;
+  submissionRate?: number;
+  rate: number; // Legacy field for compatibility
+  notes?: string;
+  interviewDate?: string;
+  offerDetails?: string;
+  rateConfirmationDate?: string;
+  statusChangedBy?: string;
+  statusChangedDate?: string;
+  statusHistory: StatusHistoryEntry[];
+  rateHistory: RateHistoryEntry[];
+}
+
+export interface Vendor {
+  id: string;
+  companyName: string;
+  recruiterName: string;
+  email: string;
+  phone: string;
+  notes?: string;
+  lastInteraction: string;
+  trustScore: number;
+  totalSubmissions: number;
+  placements: number;
+}
+
+export type JobType = 'W2' | 'C2C' | 'Both' | '1099';
+
+export type JobSourceType = 'portal' | 'vendor_email';
+
+export interface JobRequirement {
+  id: string;
+  title: string;
+  client: string;
+  skills: string[];
+  location: string;
+  jobType: JobType;
+  rate: { min: number; max: number };
+  visaRequirements: VisaStatus[];
+  description: string;
+  deadline: string;
+  source: string;
+  sourceType: JobSourceType;
+  portalApplyUrl?: string;
+  vendorEmail?: string;
+  vendorName?: string;
+  postedDate: string;
+  matchedConsultants: number;
+  status: 'open' | 'closed' | 'filled';
+}
+
+export interface DashboardStats {
+  totalConsultants: number;
+  benchConsultants: number;
+  activeJobs: number;
+  submissionsToday: number;
+  interviewsThisWeek: number;
+  placementsThisMonth: number;
+  avgMatchScore: number;
+  hotVendors: number;
+}
+
+export interface ChartData {
+  name: string;
+  value: number;
+}
+
+export interface ActivityItem {
+  id: string;
+  type: 'submission' | 'interview' | 'placement' | 'job' | 'email';
+  message: string;
+  timestamp: string;
+  icon?: string;
+}
