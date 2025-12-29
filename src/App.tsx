@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SubmissionsProvider } from "@/context/SubmissionsContext";
 
+import Login from "@/pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Consultants from "./pages/Consultants";
 import ConsultantProfile from "./pages/ConsultantProfile";
@@ -17,6 +18,8 @@ export default function App() {
     <SubmissionsProvider>
       <BrowserRouter>
         <Routes>
+          <Route path="/login" element={<Login />} />
+          
           <Route path="/" element={<Dashboard />} />
           <Route path="/consultants" element={<Consultants />} />
           <Route path="/consultants/:id" element={<ConsultantProfile />} />
