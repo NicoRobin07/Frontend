@@ -23,7 +23,8 @@ export function MainLayout({ children, title, subtitle, action, showBackButton =
       <Sidebar />
       
       {/* Main Content */}
-      <div className="pl-64 min-h-screen">
+      {/* Main Content */}
+<div className="pl-64 min-h-screen max-w-[1440px] mx-auto">
         {/* Top Header */}
         <header className="h-16 border-b border-border bg-card/50 backdrop-blur-xl sticky top-0 z-40">
           <div className="h-full px-6 flex items-center justify-between">

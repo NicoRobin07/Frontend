@@ -3,6 +3,7 @@ import { SubmissionsProvider } from "@/context/SubmissionsContext";
 
 import Dashboard from "./pages/Dashboard";
 import Consultants from "./pages/Consultants";
+import ConsultantProfile from "./pages/ConsultantProfile";
 import Jobs from "./pages/Jobs";
 import Vendors from "./pages/Vendors";
 import Submissions from "./pages/Submissions";
@@ -18,6 +19,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/consultants" element={<Consultants />} />
+          <Route path="/consultants/:id" element={<ConsultantProfile />} />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/vendors" element={<Vendors />} />
           <Route path="/submissions" element={<Submissions />} />

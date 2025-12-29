@@ -64,12 +64,13 @@ const mockResumes: ResumeVersion[] = [
 ];
 
 export default function ConsultantProfile() {
-  const { consultantId } = useParams<{ consultantId: string }>();
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [resumes, setResumes] = useState<ResumeVersion[]>(mockResumes);
   const [showUploadModal, setShowUploadModal] = useState(false);
   
-  const consultant = mockConsultants.find(c => c.id === consultantId);
+  const consultant = mockConsultants.find(c => c.id === id);
+
 
   const handleSetPrimary = (id: string) => {
     setResumes(prev => prev.map(r => ({
@@ -337,7 +338,7 @@ export default function ConsultantProfile() {
       </div>
 
       {/* Performance Analytics Section */}
-      <PerformanceAnalytics consultantId={consultantId || ''} />
+      <PerformanceAnalytics consultantId={id || ''} />
 
       {/* Upload Resume Modal */}
       <Dialog open={showUploadModal} onOpenChange={setShowUploadModal}>

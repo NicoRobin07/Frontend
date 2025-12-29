@@ -198,47 +198,112 @@ export default function Jobs() {
       showBackButton={false}
     >
       {/* Search & Filters */}
-      <div className="flex items-center gap-3 p-3 bg-card border border-border rounded-lg mb-4">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          <Input
-            placeholder="Search jobs..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-9 h-9"
-          />
-          {searchQuery && (
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7"
-              onClick={() => setSearchQuery("")}
-            >
-              <X className="w-3 h-3" />
-            </Button>
-          )}
+<div className="flex items-center gap-3 p-3 bg-card border border-border rounded-lg mb-4">
+  <div className="relative flex-1">
+    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+    <Input
+      placeholder="Search by job title, client, location, skills..."
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+      className="pl-9 h-9"
+    />
+    {searchQuery && (
+      <Button
+        variant="ghost"
+        size="icon"
+        className="absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7"
+        onClick={() => setSearchQuery("")}
+      >
+        <X className="w-3 h-3" />
+      </Button>
+    )}
+  </div>
+
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline" size="sm" className="gap-2">
+        <Filter className="w-3 h-3" />
+        Source
+      </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent align="end">
+      {allSources.map((source) => (
+        <DropdownMenuCheckboxItem
+          key={source}
+          checked={selectedSources.includes(source)}
+          onCheckedChange={() => toggleSource(source)}
+        >
+          {source}
+        </DropdownMenuCheckboxItem>
+      ))}
+    </DropdownMenuContent>
+  </DropdownMenu>
+
+  <div className="ml-auto text-sm text-muted-foreground">
+    Found {filteredJobs.length} jobs
+  </div>
+</div>
+
+      
+            {/* Tabs */}
+      <div className="flex items-center gap-2 mb-4">
+        <Button
+          size="sm"
+          variant={sourceTypeFilter === "all" ? "default" : "outline"}
+          onClick={() => setSourceTypeFilter("all")}
+          className="gap-2"
+        >
+          <Briefcase className="w-4 h-4" />
+          All Jobs ({mockJobs.length})
+        </Button>
+
+        <Button
+          size="sm"
+          variant={sourceTypeFilter === "portal" ? "default" : "outline"}
+          onClick={() => setSourceTypeFilter("portal")}
+          className="gap-2"
+        >
+          <Globe className="w-4 h-4" />
+          Portals ({portalJobs})
+        </Button>
+
+        <Button
+          size="sm"
+          variant={sourceTypeFilter === "vendor_email" ? "default" : "outline"}
+          onClick={() => setSourceTypeFilter("vendor_email")}
+          className="gap-2"
+        >
+          <Mail className="w-4 h-4" />
+          Vendor Emails ({vendorEmailJobs})
+        </Button>
+      </div>
+
+            {/* Stats Bar */}
+      <div className="flex items-center justify-between p-4 mb-6 bg-card border border-border rounded-lg">
+        <div className="flex items-center gap-6 text-sm">
+          <div className="flex items-center gap-2">
+            <Briefcase className="w-4 h-4 text-primary" />
+            <span>{openJobs} Open Jobs</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Users className="w-4 h-4 text-primary" />
+            <span>{totalMatches} Total Matches</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <CheckCircle className="w-4 h-4 text-success" />
+            <span>{filledJobs} Filled</span>
+          </div>
         </div>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm" className="gap-2">
-              <Filter className="w-3 h-3" />
-              Source
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {allSources.map((source) => (
-              <DropdownMenuCheckboxItem
-                key={source}
-                checked={selectedSources.includes(source)}
-                onCheckedChange={() => toggleSource(source)}
-              >
-                {source}
-              </DropdownMenuCheckboxItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Button variant="outline" size="sm" className="gap-2">
+          <RefreshCw className="w-4 h-4" />
+          Sync Now
+        </Button>
       </div>
+
+
 
       {/* Jobs Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
